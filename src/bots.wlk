@@ -77,7 +77,7 @@ object policia {
 object benito {	
 	const palabras = ['droga', 'falopa']
 	method cumpleCondiciones(tweet){
-		return palabras.any({ palabra => tweet.texto().contains(palabra) })
+		return palabras.any({ palabra => tweet.contiene(palabra) })
 	}
 	method responder(tweet){
 		policia.guardarTweet(tweet)			
@@ -98,7 +98,7 @@ class BotPublicitario {
 	}
 	
 	method cumpleCondiciones(tweet){
-		return tweet.texto().contains(palabra)
+		return tweet.contiene(palabra)
 	}
 	method responder(tweet){
 		pdpwitter.recibirTweet(new Tweet(['@' + tweet.usuario(), link], imagen, nombre))	

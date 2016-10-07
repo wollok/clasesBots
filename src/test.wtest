@@ -2,19 +2,19 @@ import bots.*
 import fixture.*
 test "pdpwitter recibe tweets" {
 	pdpwitter.recibirTweet(fixture.tweetValido('hola'))
-	assert.equals(pdpwitter.tweets().size(), 1)
+	assert.equals(1, pdpwitter.tweets().size())
 }
 
 test "pdpwitter empieza sin tweets" {
-	assert.equals(pdpwitter.tweets().size(), 0)
+	assert.equals(0, pdpwitter.tweets().size())
 }
 test "pdpwitter detecta tweets de un usuario si los hay" {
 	pdpwitter.recibirTweet(fixture.tweetValido('hola'))
-	assert.equals(pdpwitter.tweetsParaUsuario('hola').size(), 1)
+	assert.equals(1, pdpwitter.tweetsParaUsuario('hola').size())
 }
 test "pdpwitter detecta tweets de un usuario si no los hay" {
 	pdpwitter.recibirTweet(fixture.tweetValido('hola2'))
-	assert.equals(pdpwitter.tweetsParaUsuario('hola').size(), 0)
+	assert.equals(0, pdpwitter.tweetsParaUsuario('hola').size())
 }
 
 
@@ -31,5 +31,5 @@ test "un analista recibe todo tweet" {
 	pdpwitter.agregarBot(botAnalista)
 	pdpwitter.recibirTweet(fixture.tweetValido('hola'))
 	pdpwitter.recibirTweet(fixture.tweetValido('hola'))
-	assert.equals(botAnalista.tweets().size(), 2)
+	assert.equals(2, botAnalista.tweets().size())
 }
