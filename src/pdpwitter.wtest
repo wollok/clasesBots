@@ -1,0 +1,36 @@
+import pdpwitter.*
+
+describe "pdpwitter" {
+	var imagen = new Imagen('hola.jpg', 2134)
+	var tweetLargo = new Tweet(['esto', 'es', 'un', 'tweet', 'tweet', 'tweet', 'tweet', 'tweet', 'tweet', 'tweet', 'tweet', 'tweet', 'tweet', 'tweet', 'tweet', 'tweet', 'tweet', 'tweet', 'tweet', 'tweet', 'tweet', 'tweet', 'tweet', 'tweet', 'tweet', 'tweet', 'tweet', 'tweet', 'tweet', 'tweet', 'tweet', 'tweet', 'tweet', 'tweet', 'tweet', 'tweet', 'tweet', 'tweet', 'tweet', 'tweet', 'tweet', 'tweet', 'tweet', 'tweet', 'tweet', 'tweet', 'tweet', 'tweet', 'tweet', 'tweet', 'tweet', 'tweet', 'tweet', 'tweet', 'tweet', 'tweet', 'tweet', 'tweet', 'tweet', 'tweet', 'tweet', 'tweet', 'tweet', 'tweet', 'tweet', 'tweet', 'tweet', 'tweet', 'tweet', 'tweet', 'tweet', 'tweet', 'tweet', 'tweet', 'tweet', 'tweet', 'tweet', 'tweet', 'tweet', 'tweet', 'tweet', 'tweet', 'tweet', 'tweet', 'tweet', 'tweet', 'tweet', 'tweet', 'tweet', 'tweet', 'tweet', 'tweet', 'tweet', 'tweet', 'tweet'], imagen, 'usuario')
+	var tweet = new Tweet(['esto', 'es', 'un', 'tweet'], imagen, 'usuario')
+	var tweetParaResponder = new Tweet(['esto', 'es', 'un', 'tweet', 'sobre', 'empanadas'], imagen, 'usuario')
+	var tweetSospechoso = new Tweet(['droga', 'y', 'falopa'], imagen, 'usuario')
+
+	test "empieza sin tweets" {
+		assert.equals(0, pdpwitter.tweets().size())
+	}
+	test "al recibir un tweet, se agrega a la lista" {
+		pdpwitter.recibirTweet(tweet)
+		assert.equals(1, pdpwitter.tweets().size())
+	}
+	
+	test "al recibir un tweet muy largo, no se agrega a la lista" {
+		assert.throwsException({pdpwitter.recibirTweet(tweetLargo)})
+	}
+	test "al recibir un tweet sospechoso, la policía se lo guara" {
+		pdpwitter.recibirTweet(tweetSospechoso)
+		assert.equals(tweetSospechoso, policia.tweetsIlegales().first())
+	}
+	test "al recibir un tweet al que un bot responde, se le responde" {
+		pdpwitter.recibirTweet(tweetParaResponder)
+		assert.equals(2, pdpwitter.tweets().size())
+	}
+	
+	test "al recibir un tweet al que ningún bot responde, no hay bots para responder" {
+		assert.equals(0, pdpwitter.botsParaResponder(tweet).size())
+	}
+	test "al recibir un tweet al que un bot responde, hay bots para responder" {
+		assert.equals(1, pdpwitter.botsParaResponder(tweetParaResponder).size())
+	}
+}

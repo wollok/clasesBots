@@ -2,8 +2,8 @@ class Imagen {
 	var nombre
 	var tamanio
 	constructor(_nombre, _tamanio){
-		nombre = _nombre;
-		tamanio = _tamanio;
+		nombre = _nombre
+		tamanio = _tamanio
 	}
 	
 }
@@ -13,15 +13,15 @@ class Tweet {
 	var imagen
 	var usuario
 	constructor(_texto, _imagen, _usuario){
-		texto = _texto;
-		imagen = _imagen;
-		usuario = _usuario;
+		texto = _texto
+		imagen = _imagen
+		usuario = _usuario
 	}
 	method texto(){
-		return texto;
+		return texto
 	}
 	method usuario(){
-		return usuario;
+		return usuario
 	}
 	method contiene(palabra){
 		return texto.contains(palabra)
@@ -29,16 +29,19 @@ class Tweet {
 	method esDemasiadoLargo(){
 		return texto.size() > 15
 	}
+	method aQuienSeDirige(){
+		return texto.filter({palabra => palabra.startsWith("@")}).first()
+	}
 	
 	method esALaNada(){
-		return !texto.any({palabra => palabra.startsWith("@")})
+		return self.aQuienSeDirige() == ""
 	}
 }
 
 object pdpwitter { 
 	var tweets = []
 	var bots = [benito, 
-		new BotPublicitario('comida', 'www.google.com', 'soloEmpanadas', new Imagen('hola', 120) )
+		new BotPublicitario('empanadas', 'www.google.com', 'soloEmpanadas', new Imagen('hola', 120) )
 		]	
 	method recibirTweet(tweet){
 		if(tweet.esDemasiadoLargo()){
@@ -48,9 +51,6 @@ object pdpwitter {
 		self.botsParaResponder(tweet).forEach({ bot => bot.responder(tweet)})
 	}
 	
-	method tweets(){
-		return tweets;
-	}
 	method agregarBot(bot){
 		bots.add(bot)
 	}
@@ -65,6 +65,9 @@ object pdpwitter {
 	method tweetsALaNada(){
 		return tweets.filter({ tweet=> tweet.esALaNada() })
 	}
+	method tweets(){
+		return tweets
+	}
 }
 
 object policia {
@@ -72,12 +75,15 @@ object policia {
 	method guardarTweet(tweet){
 		tweetsIlegales.add(tweet)
 	}
+	method tweetsIlegales(){
+		return tweetsIlegales
+	}
 }
 
 object benito {	
 	const palabras = ['droga', 'falopa']
 	method cumpleCondiciones(tweet){
-		return palabras.any({ palabra => tweet.contiene(palabra) })
+		return palabras.any({ palabra => tweet.texto().contains(palabra) })
 	}
 	method responder(tweet){
 		policia.guardarTweet(tweet)			
@@ -85,10 +91,10 @@ object benito {
 }
 
 class BotPublicitario {
-	var palabra;
-	var link;
-	var nombre;
-	var imagen;
+	var palabra
+	var link
+	var nombre
+	var imagen
 	
 	constructor(_palabra, _link, _nombre, _imagen	){
 		palabra = _palabra
@@ -98,7 +104,7 @@ class BotPublicitario {
 	}
 	
 	method cumpleCondiciones(tweet){
-		return tweet.contiene(palabra)
+		return tweet.texto().contains(palabra)
 	}
 	method responder(tweet){
 		pdpwitter.recibirTweet(new Tweet(['@' + tweet.usuario(), link], imagen, nombre))	
@@ -114,7 +120,6 @@ class BotAnalista {
 	method responder(tweet){
 		tweets.add(tweet)
 	}
-	method tweets(){
-		return tweets
-	}
 }
+
+
