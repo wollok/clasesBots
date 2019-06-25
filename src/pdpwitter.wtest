@@ -1,11 +1,11 @@
 import pdpwitter.*
 
 describe "pdpwitter" {
-	var imagen = new Imagen('hola.jpg', 2134)
-	var tweetLargo = new Tweet(['esto', 'es', 'un', 'tweet', 'tweet', 'tweet', 'tweet', 'tweet', 'tweet', 'tweet', 'tweet', 'tweet', 'tweet', 'tweet', 'tweet', 'tweet', 'tweet', 'tweet', 'tweet', 'tweet', 'tweet', 'tweet', 'tweet', 'tweet', 'tweet', 'tweet', 'tweet', 'tweet', 'tweet', 'tweet', 'tweet', 'tweet', 'tweet', 'tweet', 'tweet', 'tweet', 'tweet', 'tweet', 'tweet', 'tweet', 'tweet', 'tweet', 'tweet', 'tweet', 'tweet', 'tweet', 'tweet', 'tweet', 'tweet', 'tweet', 'tweet', 'tweet', 'tweet', 'tweet', 'tweet', 'tweet', 'tweet', 'tweet', 'tweet', 'tweet', 'tweet', 'tweet', 'tweet', 'tweet', 'tweet', 'tweet', 'tweet', 'tweet', 'tweet', 'tweet', 'tweet', 'tweet', 'tweet', 'tweet', 'tweet', 'tweet', 'tweet', 'tweet', 'tweet', 'tweet', 'tweet', 'tweet', 'tweet', 'tweet', 'tweet', 'tweet', 'tweet', 'tweet', 'tweet', 'tweet', 'tweet', 'tweet', 'tweet', 'tweet', 'tweet'], imagen, 'usuario')
-	var tweet = new Tweet(['esto', 'es', 'un', 'tweet'], imagen, 'usuario')
-	var tweetParaResponder = new Tweet(['esto', 'es', 'un', 'tweet', 'sobre', 'empanadas'], imagen, 'usuario')
-	var tweetSospechoso = new Tweet(['droga', 'y', 'falopa'], imagen, 'usuario')
+	var imagen = new Imagen(nombre = 'hola.jpg', tamanio = 2134)
+	var tweetLargo = new Tweet(texto= ['esto', 'es', 'un', 'tweet', 'tweet', 'tweet', 'tweet', 'tweet', 'tweet', 'tweet', 'tweet', 'tweet', 'tweet', 'tweet', 'tweet', 'tweet', 'tweet', 'tweet', 'tweet', 'tweet', 'tweet', 'tweet', 'tweet', 'tweet', 'tweet', 'tweet', 'tweet', 'tweet', 'tweet', 'tweet', 'tweet', 'tweet', 'tweet', 'tweet', 'tweet', 'tweet', 'tweet', 'tweet', 'tweet', 'tweet', 'tweet', 'tweet', 'tweet', 'tweet', 'tweet', 'tweet', 'tweet', 'tweet', 'tweet', 'tweet', 'tweet', 'tweet', 'tweet', 'tweet', 'tweet', 'tweet', 'tweet', 'tweet', 'tweet', 'tweet', 'tweet', 'tweet', 'tweet', 'tweet', 'tweet', 'tweet', 'tweet', 'tweet', 'tweet', 'tweet', 'tweet', 'tweet', 'tweet', 'tweet', 'tweet', 'tweet', 'tweet', 'tweet', 'tweet', 'tweet', 'tweet', 'tweet', 'tweet', 'tweet', 'tweet', 'tweet', 'tweet', 'tweet', 'tweet', 'tweet', 'tweet', 'tweet', 'tweet', 'tweet', 'tweet'], imagen = imagen, usuario = 'usuario')
+	var tweet = new Tweet(texto = ['esto', 'es', 'un', 'tweet'], imagen = imagen, usuario = 'usuario')
+	var tweetParaResponder = new Tweet(texto = ['esto', 'es', 'un', 'tweet', 'sobre', 'empanadas'], imagen = imagen, usuario = 'usuario')
+	var tweetSospechoso = new Tweet(texto = ['droga', 'y', 'falopa'], imagen = imagen, usuario = 'usuario')
 
 	test "empieza sin tweets" {
 		assert.equals(0, pdpwitter.tweets().size())
@@ -18,7 +18,7 @@ describe "pdpwitter" {
 	test "al recibir un tweet muy largo, no se agrega a la lista" {
 		assert.throwsException({pdpwitter.recibirTweet(tweetLargo)})
 	}
-	test "al recibir un tweet sospechoso, la policía se lo guara" {
+	test "al recibir un tweet sospechoso, la policï¿½a se lo guara" {
 		pdpwitter.recibirTweet(tweetSospechoso)
 		assert.equals(tweetSospechoso, policia.tweetsIlegales().first())
 	}
@@ -27,7 +27,7 @@ describe "pdpwitter" {
 		assert.equals(2, pdpwitter.tweets().size())
 	}
 	
-	test "al recibir un tweet al que ningún bot responde, no hay bots para responder" {
+	test "al recibir un tweet al que ningï¿½n bot responde, no hay bots para responder" {
 		assert.equals(0, pdpwitter.botsParaResponder(tweet).size())
 	}
 	test "al recibir un tweet al que un bot responde, hay bots para responder" {

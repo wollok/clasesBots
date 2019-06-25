@@ -1,6 +1,6 @@
 class Imagen {
-	var nombre
-	var tamanio
+	var property nombre
+	var property tamanio
 
 }
 
@@ -22,27 +22,28 @@ class Tweet {
 		return texto.size() > 15
 	}
 	
-	method esALaNada(){
-		return !texto.any({palabra => palabra.startsWith("@")})
+	method aQuienSeDirige(){	
+		return texto.filter({palabra => palabra.startsWith("@")}).first()	
+	}	
+
+ 	method esALaNada(){
+		return self.aQuienSeDirige() == ""
 	}
 }
 
 object pdpwitter { 
-	var tweets = []
+	var property tweets  = []
 	var bots = [benito, 
-		new BotPublicitario('comida', 'www.google.com', 'soloEmpanadas', new Imagen('hola', 120) )
+		new BotPublicitario(palabra = 'empanadas', link = 'www.google.com', nombre = 'soloEmpanadas', imagen = new Imagen(nombre = 'hola', tamanio = 120) )
 		]	
 	method recibirTweet(tweet){
 		if(tweet.esDemasiadoLargo()){
-			error.throwWithMessage("Tweet demasiado largo")
+			self.error("Tweet demasiado largo")
 		}
 		tweets.add(tweet)
 		self.botsParaResponder(tweet).forEach({ bot => bot.responder(tweet)})
 	}
 	
-	method tweets(){
-		return tweets;
-	}
 	method agregarBot(bot){
 		bots.add(bot)
 	}
@@ -60,7 +61,7 @@ object pdpwitter {
 }
 
 object policia {
-	var tweetsIlegales = []
+	var property tweetsIlegales = []
 	method guardarTweet(tweet){
 		tweetsIlegales.add(tweet)
 	}
@@ -86,7 +87,7 @@ class BotPublicitario {
 		return tweet.contiene(palabra)
 	}
 	method responder(tweet){
-		pdpwitter.recibirTweet(new Tweet(['@' + tweet.usuario(), link], imagen, nombre))	
+		pdpwitter.recibirTweet(new Tweet(texto = ['@' + tweet.usuario(), link], imagen = imagen, usuario = nombre))	
 	}
 }
 
