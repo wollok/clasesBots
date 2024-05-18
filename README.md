@@ -1,6 +1,6 @@
 # Los robots en todos lados
  
-[![Build Status](https://travis-ci.org/wollok/clasesBots.svg?branch=master)](https://travis-ci.org/wollok/clasesBots)
+[![Build Status](https://github.com/wollok/clasesBots/actions/workflows/ci.yml/badge.svg)](https://github.com/wollok/clasesBots/actions/workflows/ci.yml)
 
 
 ## Objetos y Clases
